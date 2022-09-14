@@ -23,7 +23,7 @@ bs=(4 1 0.4444 0.4444 1 4)
 
 
 for ((j=0; j < ${#bs[@]}; j++)); do
-	/home/users/darshan/julia-1.7.2/bin/julia forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $T $burn $period $save_cov $seed&
+	julia forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $T $burn $period $save_cov $seed&
 	PIDS+=($!)
 done
 
@@ -34,7 +34,7 @@ cont=0
 for ((j=0; j < ${#bs[@]}; j++)); do 
 	wait ${PIDS[$j]} 
 	echo done ${PIDS[$j]}
-	/home/users/darshan/julia-1.7.2/bin/julia cont_forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $T $burn $period $save_cov $seed $new_T $new_burn $cont&
+	julia cont_forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $T $burn $period $save_cov $seed $new_T $new_burn $cont&
 	PIDS1+=($!)
 done
 echo finished run 0
@@ -47,7 +47,7 @@ cont=1
 for ((j=0; j < ${#bs[@]}; j++)); do 
 	wait ${PIDS1[$j]} 
 	echo done ${PIDS1[$j]}
-	/home/users/darshan/julia-1.7.2/bin/julia cont_forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $new_T $new_burn $period $save_cov $seed $new_T2 $new_burn2 $cont&
+	julia cont_forced_chain.jl FPUT ${as[$j]} ${bs[$j]} $c $alpha $omega $T_l $gamma_l $tension $lambda $d $dt $new_T $new_burn $period $save_cov $seed $new_T2 $new_burn2 $cont&
 	PIDS2+=($!)
 done
 echo finished run 1
